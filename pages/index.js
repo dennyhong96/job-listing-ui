@@ -1,4 +1,8 @@
-export default function Home() {
+import axios from "axios";
+
+export default function Home({ jobs }) {
+  console.log({ jobs });
+
   return (
     <div className="flex justify-center">
       <a
@@ -33,3 +37,20 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  let jobs = [];
+  try {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN}/api/jobs`);
+    jobs = res.data.jobs;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return {
+    props: {
+      jobs,
+    },
+    revalidate: 1,
+  };
+};
