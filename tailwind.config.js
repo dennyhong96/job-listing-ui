@@ -7,14 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#ff6363",
-        secondary: {
-          100: "#e2e2d5",
-          200: "#888883",
-        },
+        primary: "#5ba4a4",
+        "light-cyan": "#effafa",
+        "light-cyan-2": "#eef6f6",
+        "dark-cyan": "#7b8e8e",
+        "dark-cyan-2": "#2c3a3a",
       },
       fontFamily: {
-        body: ["Nunito"], // will generate class name: font-body
+        body: ["Spartan"], // will generate class name: font-body
       },
     },
   },
