@@ -4,8 +4,8 @@ const JobCard = ({ job }) => {
   return (
     <div
       className={clsx(
-        "relative flex flex-col mb-10 mx-10 items-start pt-8 md:flex-row md:items-center justify-between p-6 md:pt-6 bg-white md:mb-4 rounded-md shadow-lg",
-        { ["border-l-4 border-primary"]: job.featured }
+        "relative flex flex-col items-start pt-8 justify-between p-6 bg-white rounded-md shadow-lg md:flex-row md:items-center md:pt-6",
+        { ["border-l-5 border-primary"]: job.featured }
       )}
     >
       {/* Left */}
@@ -25,13 +25,13 @@ const JobCard = ({ job }) => {
               {job.company}
 
               {job.new && (
-                <span className="ml-3 mr-2 text-xxs uppercase text-white bg-primary p-2 rounded-full">
+                <span className="ml-3 mr-2 text-xxs uppercase font-bold text-white bg-primary p-2 rounded-full">
                   New!
                 </span>
               )}
 
               {job.featured && (
-                <span className="text-xxs uppercase text-white bg-dark-cyan-2 p-2 rounded-full">
+                <span className="text-xxs uppercase text-white font-bold bg-dark-cyan-2 p-2 rounded-full">
                   Featured!
                 </span>
               )}
@@ -45,25 +45,25 @@ const JobCard = ({ job }) => {
 
           {/* Job posted at, contract, and location */}
           <div className="flex items-center space-x-2">
-            <span className="text-gray-600 text-xs font-medium">
+            <span className="text-gray-500 text-xs font-medium">
               {job.contract}
             </span>
-            <span className="text-gray-600 text-xs font-medium">•</span>
-            <span className="text-gray-600 text-xs font-medium">
+            <span className="text-gray-500 text-xs font-medium">•</span>
+            <span className="text-gray-500 text-xs font-medium">
               {job.postedAt}
             </span>
-            <span className="text-gray-600 text-xs font-medium">•</span>
-            <span className="text-gray-600 text-xs font-medium">
+            <span className="text-gray-500 text-xs font-medium">•</span>
+            <span className="text-gray-500 text-xs font-medium">
               {job.location}
             </span>
           </div>
         </div>
       </div>
 
-      <hr className="md:hidden w-full bg-gray-200 my-2" />
+      <hr className="w-full border-gray-200 my-2 md:hidden" />
 
       {/* Right - Job meta info */}
-      <div className="flex flex-wrap justify-start items-center cursor-pointer space-y-2">
+      <div className="flex flex-wrap justify-start items-center cursor-pointer space-y-2 md:space-y-0">
         <span className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0">
           {job.role}
         </span>

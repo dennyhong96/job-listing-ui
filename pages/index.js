@@ -8,9 +8,19 @@ export default function Home({ preJobs }) {
 
   return (
     <div className="">
-      {jobs.map((job) => (
-        <JobCard key={job.id} job={job} />
-      ))}
+      <header>
+        <img
+          src="/images/bg-header-desktop.svg"
+          alt="Header"
+          className="w-full bg-primary"
+        />
+      </header>
+
+      <main className="w-11/12 mx-auto my-16 max-w-screen-lg flex flex-col space-y-10 md:space-y-6">
+        {jobs.map((job) => (
+          <JobCard key={job.id} job={job} />
+        ))}
+      </main>
     </div>
   );
 }
