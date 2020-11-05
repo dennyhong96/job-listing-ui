@@ -16,6 +16,9 @@ module.exports = {
       fontFamily: {
         body: ["Spartan"], // will generate class name: font-body
       },
+      fontSize: {
+        xxs: "0.5rem",
+      },
     },
   },
   variants: {},
