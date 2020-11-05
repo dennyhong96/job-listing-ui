@@ -1,3 +1,4 @@
+import Image from "next/image";
 import clsx from "clsx";
 
 const JobCard = ({ job }) => {
@@ -11,9 +12,11 @@ const JobCard = ({ job }) => {
       {/* Left */}
       <div className="flex items-center md:space-x-4">
         {/* Company Logo */}
-        <img
+        <Image
           src={job.logo}
           alt={job.company}
+          width={88}
+          height={88}
           className="absolute top-0 -mt-6 w-12 h-12 md:mt-0 md:static md:block md:w-16 md:h-16"
         />
 

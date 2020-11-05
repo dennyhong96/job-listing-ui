@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 import JobCard from "../components/JobCard";
 
@@ -7,15 +8,19 @@ export default function Home({ preJobs }) {
   const [jobs, setJobs] = useState(preJobs);
 
   return (
-    <div className="">
+    <div>
+      {/* Header */}
       <header>
-        <img
+        <Image
           src="/images/bg-header-desktop.svg"
           alt="Header"
+          width={1366}
+          height={156}
           className="w-full bg-primary"
         />
       </header>
 
+      {/* Job Cards List */}
       <main className="w-11/12 mx-auto my-16 max-w-screen-lg flex flex-col space-y-10 md:space-y-6">
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} />
