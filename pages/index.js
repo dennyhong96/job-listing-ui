@@ -1,7 +1,8 @@
+import { useState } from "react";
 import axios from "axios";
 
-export default function Home({ jobs }) {
-  console.log({ jobs });
+export default function Home({ preJobs }) {
+  const [jobs, setJobs] = useState(preJobs);
 
   return (
     <div className="flex justify-center">
@@ -39,18 +40,17 @@ export default function Home({ jobs }) {
 }
 
 export const getStaticProps = async () => {
-  let jobs = [];
+  let preJobs = [];
+
   try {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN}/api/jobs`);
-    jobs = res.data.jobs;
+    preJobs = res.data.jobs;
   } catch (error) {
     console.error(error);
   }
 
   return {
-    props: {
-      jobs,
-    },
+    props: { preJobs },
     revalidate: 1,
   };
 };
