@@ -1,7 +1,6 @@
-import Image from "next/image";
 import clsx from "clsx";
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, onAddTag }) => {
   return (
     <div
       className={clsx(
@@ -12,11 +11,9 @@ const JobCard = ({ job }) => {
       {/* Left */}
       <div className="flex items-center md:space-x-4">
         {/* Company Logo */}
-        <Image
+        <img
           src={job.logo}
           alt={job.company}
-          width={88}
-          height={88}
           className="absolute top-0 -mt-6 w-12 h-12 md:mt-0 md:static md:block md:w-16 md:h-16"
         />
 
@@ -42,7 +39,7 @@ const JobCard = ({ job }) => {
           </div>
 
           {/* Job position */}
-          <h2 className="text-gray-900 font-bold cursor-pointer hover:text-primary">
+          <h2 className="text-gray-900 font-bold cursor-pointer hover:text-primary transition ease-out duration-200">
             {job.position}
           </h2>
 
@@ -67,17 +64,24 @@ const JobCard = ({ job }) => {
 
       {/* Right - Job meta info */}
       <div className="flex flex-wrap justify-start items-center cursor-pointer space-y-2 md:space-y-0">
-        <span className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0">
+        <span
+          onClick={onAddTag.bind(this, job.role)}
+          className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0 transition ease-out duration-200"
+        >
           {job.role}
         </span>
-        <span className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0">
+        <span
+          onClick={onAddTag.bind(this, job.level)}
+          className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0 transition ease-out duration-200"
+        >
           {job.level}
         </span>
 
         {job.languages?.map((lang, idx) => (
           <span
+            onClick={onAddTag.bind(this, lang)}
             key={idx}
-            className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0"
+            className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0 transition ease-out duration-200"
           >
             {lang}
           </span>
@@ -85,8 +89,9 @@ const JobCard = ({ job }) => {
 
         {job.tools?.map((tool, idx) => (
           <span
+            onClick={onAddTag.bind(this, tool)}
             key={idx}
-            className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0"
+            className="text-xs font-semibold p-2 bg-light-cyan text-primary rounded hover:bg-primary hover:text-white mr-2 last:mr-0 transition ease-out duration-200"
           >
             {tool}
           </span>

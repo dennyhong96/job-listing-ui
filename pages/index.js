@@ -1,30 +1,60 @@
 import { useState } from "react";
+import clsx from "clsx";
 import axios from "axios";
-import Image from "next/image";
 
 import JobCard from "../components/JobCard";
+import JobFilter from "../components/JobFilter";
 
 export default function Home({ preJobs }) {
   const [jobs, setJobs] = useState(preJobs);
+  const [tags, setTags] = useState([]);
+
+  const handleAddTag = (tag) => {
+    setTags((prev) => Array.from(new Set([...prev, tag])));
+  };
+
+  const handleRemoveTag = (tag) => {
+    setTags((prev) => prev.filter((t) => t !== tag));
+  };
+
+  const handleClearTags = () => {
+    setTags([]);
+  };
 
   return (
     <div>
       {/* Header */}
       <header>
-        <Image
+        <img
           src="/images/bg-header-desktop.svg"
           alt="Header"
-          width={1366}
-          height={156}
           className="w-full bg-primary"
         />
       </header>
 
-      {/* Job Cards List */}
-      <main className="w-11/12 mx-auto my-16 max-w-screen-lg flex flex-col space-y-10 md:space-y-6">
-        {jobs.map((job) => (
-          <JobCard key={job.id} job={job} />
-        ))}
+      <main className="-mt-12 relative z-10">
+        {/* Job Filter */}
+        {!!tags.length && (
+          <div className="w-11/12 mx-auto max-w-screen-lg ">
+            <JobFilter
+              tags={tags}
+              onRemoveTag={handleRemoveTag}
+              onClearTags={handleClearTags}
+            />
+          </div>
+        )}
+
+        {/* Job Cards List */}
+        <div
+          className={clsx(
+            "w-11/12 mx-auto py-12 max-w-screen-lg flex flex-col space-y-10 md:space-y-6",
+            { ["pt-24"]: !tags.length }
+          )}
+        >
+          {jobs.map((job) => (
+            <JobCard key={job.id} job={job} onAddTag={handleAddTag} />
+          ))}
+        </div>
       </main>
     </div>
   );
