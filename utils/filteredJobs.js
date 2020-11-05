@@ -3,7 +3,7 @@ const filteredJobs = (allJobs, tags) => {
     return allJobs;
   } else {
     return allJobs.filter((job) =>
-      tags.some((tag) =>
+      tags.every((tag) =>
         `${job.role} ${job.level} ${job.languages.join(" ")} ${job.tools.join(
           " "
         )}`
