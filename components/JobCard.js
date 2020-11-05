@@ -1,8 +1,16 @@
 import clsx from "clsx";
+import { motion } from "framer-motion";
+
+import { fadeVariants } from "../motion/variants";
 
 const JobCard = ({ job, onAddTag }) => {
   return (
-    <div
+    <motion.div
+      key={job.id}
+      variants={fadeVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       className={clsx(
         "relative flex flex-col items-start pt-8 justify-between p-6 bg-white rounded-md shadow-lg md:flex-row md:items-center md:pt-6",
         { ["border-l-5 border-primary"]: job.featured }
@@ -97,7 +105,7 @@ const JobCard = ({ job, onAddTag }) => {
           </span>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

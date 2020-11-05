@@ -1,13 +1,18 @@
-import { useState } from "react";
-import clsx from "clsx";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
 
 import JobCard from "../components/JobCard";
 import JobFilter from "../components/JobFilter";
+import filteredJobs from "../utils/filteredJobs";
 
 export default function Home({ preJobs }) {
   const [jobs, setJobs] = useState(preJobs);
   const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    setJobs(filteredJobs(preJobs, tags));
+  }, [preJobs, tags, filteredJobs]);
 
   const handleAddTag = (tag) => {
     setTags((prev) => Array.from(new Set([...prev, tag])));
@@ -32,30 +37,33 @@ export default function Home({ preJobs }) {
         />
       </header>
 
-      <main className="-mt-12 relative z-10">
+      {/* Main */}
+      <motion.main
+        animate={{ y: tags.length ? "3rem" : "-3rem" }}
+        transition={{ duration: 0.5 }}
+      >
         {/* Job Filter */}
-        {!!tags.length && (
-          <div className="w-11/12 mx-auto max-w-screen-lg ">
-            <JobFilter
-              tags={tags}
-              onRemoveTag={handleRemoveTag}
-              onClearTags={handleClearTags}
-            />
-          </div>
-        )}
+        <motion.div
+          className="w-11/12 mx-auto max-w-screen-lg"
+          animate={{ opacity: tags.length ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <JobFilter
+            tags={tags}
+            onRemoveTag={handleRemoveTag}
+            onClearTags={handleClearTags}
+          />
+        </motion.div>
 
         {/* Job Cards List */}
-        <div
-          className={clsx(
-            "w-11/12 mx-auto py-12 max-w-screen-lg flex flex-col space-y-10 md:space-y-6",
-            { ["pt-24"]: !tags.length }
-          )}
-        >
-          {jobs.map((job) => (
-            <JobCard key={job.id} job={job} onAddTag={handleAddTag} />
-          ))}
+        <div className="w-11/12 mx-auto py-12 max-w-screen-lg flex flex-col space-y-10 md:space-y-6">
+          <AnimatePresence exitBeforeEnter>
+            {jobs.map((job) => (
+              <JobCard key={job.id} job={job} onAddTag={handleAddTag} />
+            ))}
+          </AnimatePresence>
         </div>
-      </main>
+      </motion.main>
     </div>
   );
 }

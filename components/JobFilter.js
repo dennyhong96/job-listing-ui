@@ -1,12 +1,20 @@
+import { AnimatePresence, motion } from "framer-motion";
+
+import { fadeVariants } from "../motion/variants";
+
 const JobFilter = ({ tags, onRemoveTag, onClearTags }) => {
   return (
     <div className="flex justify-between p-6 bg-white rounded-md shadow-lg">
       <div className="flex flex-wrap">
-        {tags.length ? (
-          tags.map((tag, idx) => (
-            <div
+        <AnimatePresence>
+          {tags?.map((tag, idx) => (
+            <motion.div
+              variants={fadeVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
               className="flex relative overflow-hidden text-sm font-semibold bg-light-cyan text-primary items-center p-2 rounded-md m-2"
-              key={idx}
+              key={`${tag}-${idx}`}
             >
               <span className="mr-8">{tag}</span>
               <div
@@ -19,13 +27,9 @@ const JobFilter = ({ tags, onRemoveTag, onClearTags }) => {
                   className="block w-4 h-4"
                 />
               </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-sm font-semibold text-gray-900">
-            No filters applied.
-          </p>
-        )}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
       {/* Clear button */}
